@@ -1,4 +1,16 @@
 <h1>Posts#index</h1>
 
+<div>
+  <% @posts.each do |post| %>
+    <% if current_user %>
+    <div>
+      <%= post.user.name %>
+    </div>
+    <% end %>
+    <div><%= post.title %> </div>
+    <div><%= post.content %> </div>
+  <% end %>
+</div>
 
 <%= link_to "New Post", new_post_path %>
+<%= link_to "Log out", destroy_user_session_path, method: :delete %>
