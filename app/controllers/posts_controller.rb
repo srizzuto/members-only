@@ -7,10 +7,13 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    user = User.find(current_user.id)
+    @post = user.posts.build(post_params)
     if @post.save
+      flash[:notice] = "Post saved successfully."
       redirect_to root_path
     else
+      flash.now[:alert] = "Error trying to save your post."
       render "new"
     end
   end
